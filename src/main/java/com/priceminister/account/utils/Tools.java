@@ -30,12 +30,7 @@ public class Tools {
         return (null == value) ? 0.0 :value;
     }
 
-
     /**
-     * check if String can be cast in double
-     * @param doubleValue
-     * @return
-     *//**
      * Check if String can be cast in integer
      * @param str
      * @return
@@ -51,6 +46,12 @@ public class Tools {
             return false;
         }
     }
+
+    /**
+     * check if String can be cast in double
+     * @param doubleValue
+     * @return
+     */
     public boolean checkIfDouble(String doubleValue){
         try
         {
