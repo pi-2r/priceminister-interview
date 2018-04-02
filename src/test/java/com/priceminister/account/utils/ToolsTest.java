@@ -55,6 +55,7 @@ public class ToolsTest {
         Assert.assertEquals(tools.minusCalCul(-100, +100.0), 0.0, 0);
         Assert.assertEquals(tools.minusCalCul(150, -200.0), 50.0, 0);
         Assert.assertEquals(tools.minusCalCul(-200, 150.0), -50.0, 0);
+        Assert.assertEquals(tools.minusCalCul(200, 150.0), -50.0, 0);
     }
 
     @Test
@@ -68,5 +69,12 @@ public class ToolsTest {
     {
         Assert.assertEquals(tools.changeNULLToZero(null), 0.0, 0);
         Assert.assertEquals(tools.changeNULLToZero(100d), 100d, 0);
+    }
+
+    @Test
+    public void readGAPAllowed() throws Exception
+    {
+        Assert.assertEquals(tools.getAllowedWithdraw("GAP_ALLOWED"), -800);
+        Assert.assertEquals(tools.getAllowedWithdraw("kqjsdqsjdmsjqdmqjml"), 0);
     }
 }

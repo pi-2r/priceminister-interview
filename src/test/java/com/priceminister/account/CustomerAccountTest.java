@@ -39,6 +39,7 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
         Assert.assertEquals(customerAccount.getBalance(), 0.0, 0);
+        Assert.assertEquals(customerAccount.getBalance(), 0.0, 0);
     }
     
     /**
@@ -116,6 +117,30 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
     public void testSimpleWithdrawPermitted() {
         Assert.assertTrue(rule.withdrawPermitted( 0.0));
         Assert.assertTrue(rule.withdrawPermitted( 100.0));
-        Assert.assertNotEquals(rule.withdrawPermitted((double) -100), true);
+        Assert.assertNotEquals(rule.withdrawPermitted((double) -900), true);
+    }
+
+    /**
+     * Test to add and withdraw some value, without exceeding the gap
+     * @throws IllegalBalanceException
+     */
+    @Test
+    public void simpleAddandWithdraw() throws IllegalBalanceException {
+        //---- initialize account with 50€
+        Double tmp = customerAccount.getBalance();
+        Assert.assertEquals(tmp, 0.0, 0);
+        Double balance = 50d;
+        customerAccount.add(balance);
+        Assert.assertEquals(customerAccount.getBalance(), 50d, 0);
+
+        //---- add 100€
+        Double balance2 = 100d;
+        customerAccount.add(balance2);
+        Assert.assertEquals(customerAccount.getBalance(), 150d, 0);
+
+        //---- withdraw 200€
+        Double balance3 = 200d;
+        customerAccount.withdrawAndReportBalance(balance3, rule);
+        Assert.assertEquals(customerAccount.getBalance(), -50d, 0);
     }
 }

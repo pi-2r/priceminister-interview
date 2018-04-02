@@ -1,5 +1,7 @@
 package com.priceminister.account;
 
+import java.io.IOException;
+
 /**
  * Checks if the requested operation is permitted.
  */

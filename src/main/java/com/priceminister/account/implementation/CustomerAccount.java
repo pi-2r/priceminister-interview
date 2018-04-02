@@ -30,10 +30,10 @@ public class CustomerAccount implements Account {
     public Double withdrawAndReportBalance(Double withdrawnAmount, AccountRule rule)  throws IllegalBalanceException {
 
         setMyAccount(tools.minusCalCul(tools.changeNULLToZero(withdrawnAmount), getBalance()));
-
         if (!rule.withdrawPermitted(getMyAccount())) {
             throw new IllegalBalanceException(getMyAccount());
         }
+
         LOG.info("withdraw with new balance {} ", getMyAccount());
         return getMyAccount();
 

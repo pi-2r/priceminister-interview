@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class AbstractIntegrationTest {
 
-    protected static final int MIN_MONEY = 100;
+    protected static final int MIN_MONEY = 800;
     protected static final int MAX_MONEY = 100000;
 
     /**

@@ -4,6 +4,11 @@ package com.priceminister.account.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 /**
  * Created by TherPi on 30/03/2018.
  */
@@ -12,14 +17,40 @@ public class Tools {
     /** The application logger */
     private static final Logger LOG = LoggerFactory.getLogger(Tools.class);
 
+    Properties properties = new Properties();
+    final static String propFileName = "config.properties";
+    InputStream inputStream;
+
+    /**
+     * change NULL value into zero double
+     * @param value
+     * @return
+     */
     public Double changeNULLToZero(Double value) {
         return (null == value) ? 0.0 :value;
     }
+
+
     /**
      * check if String can be cast in double
      * @param doubleValue
      * @return
+     *//**
+     * Check if String can be cast in integer
+     * @param str
+     * @return
      */
+    public boolean checkIfInteger(String str) {
+        try
+        {
+            Integer.parseInt(str);
+            return true;
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+    }
     public boolean checkIfDouble(String doubleValue){
         try
         {
@@ -91,4 +122,35 @@ public class Tools {
         }
         return sum;
     }
+
+    /**
+     * Method that allows you to recover the gap allow from the config page.
+     * @param value
+     * @return
+     * @throws IOException
+     */
+    public int getAllowedWithdraw(String value) throws IOException{
+        int resultValue = 0;
+        try {
+            inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
+            if (inputStream != null) {
+                properties.load(inputStream);
+            } else {
+                throw new FileNotFoundException("property file '" + propFileName + "' not found in the classpath");
+            }
+
+            String returnValue = properties.getProperty(value);
+            if (checkIfInteger(returnValue)) {
+                LOG.info("red value allowed {}", returnValue);
+                resultValue = Integer.parseInt(returnValue);
+            }
+
+        } catch (Exception e) {
+            LOG.error("Unexpected error", e);
+        } finally {
+            inputStream.close();
+        }
+        return resultValue;
+    }
+
 }
