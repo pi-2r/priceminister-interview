@@ -139,8 +139,24 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
         Assert.assertEquals(customerAccount.getBalance(), 150d, 0);
 
         //---- withdraw 200€
-        Double balance3 = 200d;
+        Double balance3 = -200d;
         customerAccount.withdrawAndReportBalance(balance3, rule);
         Assert.assertEquals(customerAccount.getBalance(), -50d, 0);
+
+        //---- withdraw 200€
+        Double balance4 = 200d;
+        customerAccount.withdrawAndReportBalance(balance4, rule);
+        Assert.assertEquals(customerAccount.getBalance(), -250d, 0);
+
+        //---- withdraw 100€
+        Double balance5 = -100d;
+        customerAccount.withdrawAndReportBalance(balance5, rule);
+        Assert.assertEquals(customerAccount.getBalance(), -350d, 0);
+
+        //---- withdraw 450€
+        Double balance6 = 450d;
+        customerAccount.withdrawAndReportBalance(balance6, rule);
+        Assert.assertEquals(customerAccount.getBalance(), -800d, 0);
     }
+
 }

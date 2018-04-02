@@ -53,7 +53,7 @@ public class ToolsTest {
         Assert.assertEquals(tools.minusCalCul(-100, -0.0), -100.0, 0);
         Assert.assertEquals(tools.minusCalCul(-300, -200.0), -500.0, 0);
         Assert.assertEquals(tools.minusCalCul(-100, +100.0), 0.0, 0);
-        Assert.assertEquals(tools.minusCalCul(150, -200.0), 50.0, 0);
+        Assert.assertEquals(tools.minusCalCul(150, -200.0), -350.0, 0);
         Assert.assertEquals(tools.minusCalCul(-200, 150.0), -50.0, 0);
         Assert.assertEquals(tools.minusCalCul(200, 150.0), -50.0, 0);
     }

@@ -106,20 +106,25 @@ public class Tools {
 
     /**
      * Minus
-     * @param num1 withdraw
+     * @param withdraw withdraw
      * @param oldBalance current balance
      * @return
      */
-    public double minusCalCul(double num1, double oldBalance) {
+    public double minusCalCul(double withdraw, double oldBalance) {
         double sum = 0.0;
-        if( oldBalance <= 0 && num1 <0) {
-            if (oldBalance > num1)
-                sum = num1 - Math.abs(oldBalance);
+        if( oldBalance <= 0 && withdraw <0) {
+            if (oldBalance > withdraw)
+                sum = withdraw - Math.abs(oldBalance);
             else
-                sum = oldBalance -  Math.abs(num1);
+                sum = oldBalance -  Math.abs(withdraw);
         }
         else {
-            sum = Math.abs(oldBalance) - Math.abs(num1);
+            if (withdraw <= 0 && oldBalance >=0)
+                sum = Math.abs(oldBalance) - Math.abs(withdraw);
+            else if (withdraw >= 0 && oldBalance <=0)
+                sum = oldBalance - Math.abs(withdraw);
+            else
+                sum = Math.abs(oldBalance) - withdraw;
         }
         return sum;
     }
