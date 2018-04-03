@@ -39,7 +39,6 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
     @Test
     public void testAccountWithoutMoneyHasZeroBalance() {
         Assert.assertEquals(customerAccount.getBalance(), 0.0, 0);
-        Assert.assertEquals(customerAccount.getBalance(), 0.0, 0);
     }
     
     /**
@@ -51,6 +50,7 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
         Double balance = Double.valueOf(randomNumber(MAX_MONEY, MIN_MONEY));
         customerAccount.add(balance);
         Assert.assertNotEquals(customerAccount.getBalance(), tmp);
+        Assert.assertEquals(customerAccount.getBalance(), balance, 0);
     }
 
     /**
@@ -65,6 +65,7 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
         Double balance = 100d;
         customerAccount.add(balance);
         Assert.assertNotEquals(customerAccount.getBalance(), tmp);
+        Assert.assertEquals(customerAccount.getBalance(), balance, 0);
 
         Double withdrawAmount = 50d;
         Assert.assertEquals(customerAccount.withdrawAndReportBalance(withdrawAmount, rule), 50, 0);
@@ -82,6 +83,7 @@ public class CustomerAccountTest extends AbstractIntegrationTest{
         Double balance = 100d;
         customerAccount.add(balance);
         Assert.assertNotEquals(customerAccount.getBalance(), tmp);
+        Assert.assertEquals(customerAccount.getBalance(), balance, 0);
 
         Assert.assertTrue(rule.withdrawPermitted( 0.0));
         Double withdrawAmount =  Double.valueOf(randomNumber(MAX_MONEY, MIN_MONEY));
